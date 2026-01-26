@@ -1,34 +1,199 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* ApexNexon Dark Theme Styles */
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Typography Classes */
+.display-huge { 
+  font-size: 66px; 
+  font-weight: 600; 
+  line-height: 1.1; 
+  letter-spacing: -0.62px; 
+  color: #FFFFFF; 
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.display-large { 
+  font-size: 48px; 
+  font-weight: 600; 
+  line-height: 1.1; 
+  letter-spacing: -0.02em; 
+  color: #FFFFFF; 
 }
 
-.App-link {
-    color: #61dafb;
+.display-medium { 
+  font-size: 32px; 
+  font-weight: 600; 
+  line-height: 1.25; 
+  letter-spacing: -0.01em; 
+  color: #FFFFFF; 
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.heading-1 { 
+  font-size: 28px; 
+  font-weight: 600; 
+  line-height: 1.2; 
+  letter-spacing: -0.005em; 
+  color: #FFFFFF; 
+}
+
+.heading-2 { 
+  font-size: 24px; 
+  font-weight: 600; 
+  line-height: 1.3; 
+  letter-spacing: -0.02em; 
+  color: #FFFFFF; 
+}
+
+.heading-3 { 
+  font-size: 20px; 
+  font-weight: 600; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: #FFFFFF; 
+}
+
+.body-large { 
+  font-size: 20px; 
+  font-weight: 500; 
+  line-height: 1.5; 
+  letter-spacing: 0; 
+  color: #FFFFFF; 
+}
+
+.body-medium { 
+  font-size: 18px; 
+  font-weight: 400; 
+  line-height: 1.5; 
+  letter-spacing: 0; 
+  color: rgba(255, 255, 255, 0.85); 
+}
+
+.body-small { 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: rgba(255, 255, 255, 0.85); 
+}
+
+.body-muted { 
+  font-size: 16px; 
+  font-weight: 400; 
+  line-height: 1.4; 
+  letter-spacing: 0; 
+  color: #4D4D4D; 
+}
+
+/* Button Styles */
+.btn-primary {
+  background: #00FFD1;
+  color: #000000;
+  border: none;
+  border-radius: 0px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  min-height: 56px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #00FFD1;
+}
+
+.btn-primary:active {
+  background: #6FD2C0;
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  min-height: 56px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.btn-secondary:hover {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.btn-secondary:active {
+  background: #F0F0F0;
+  transform: scale(0.98);
+}
+
+/* Header Styles */
+.dark-header {
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 16px 7.6923%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.dark-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.dark-nav-link {
+  color: #4D4D4D;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.dark-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.dark-nav-link.active {
+  color: #6FD2C0;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .display-huge { font-size: 42px; }
+  .display-large { font-size: 36px; }
+  .display-medium { font-size: 28px; }
+  .heading-1 { font-size: 24px; }
+  .heading-2 { font-size: 20px; }
+  .heading-3 { font-size: 18px; }
+  .body-large { font-size: 18px; }
+  .body-medium { font-size: 16px; }
+  .body-small { font-size: 14px; }
 }
