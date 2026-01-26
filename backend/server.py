@@ -68,6 +68,61 @@ async def get_status_checks():
     
     return status_checks
 
+@api_router.post("/contact", response_model=ContactFormSubmission, status_code=status.HTTP_201_CREATED)
+async def submit_contact_form(form_data: ContactFormCreate):
+    """
+    Handle contact form submission
+    - Store in database
+    - Send email notification
+    """
+    try:
+        # Create contact submission object
+        contact_submission = ContactFormSubmission(
+            name=form_data.name,
+            email=form_data.email,
+            company=form_data.company,
+            phone=form_data.phone,
+            message=form_data.message
+        )
+        
+        # Store in database
+        submission_dict = contact_submission.model_dump()
+        submission_dict['created_at'] = submission_dict['created_at'].isoformat()
+        await db.contact_submissions.insert_one(submission_dict)
+        
+        # Send email notification
+        email_service.send_contact_form_notification(submission_dict)
+        
+        logger.info(f"Contact form submitted successfully by {form_data.email}")
+        
+        return contact_submission
+        
+    except Exception as e:
+        logger.error(f"Error processing contact form: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to process contact form submission"
+        )
+
+@api_router.get("/contact", response_model=List[ContactFormSubmission])
+async def get_contact_submissions():
+    """Get all contact form submissions (admin endpoint)"""
+    try:
+        submissions = await db.contact_submissions.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
+        
+        # Convert ISO string timestamps back to datetime objects
+        for submission in submissions:
+            if isinstance(submission['created_at'], str):
+                submission['created_at'] = datetime.fromisoformat(submission['created_at'])
+        
+        return submissions
+    except Exception as e:
+        logger.error(f"Error fetching contact submissions: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to fetch contact submissions"
+        )
+
 # Include the router in the main app
 app.include_router(api_router)
 
