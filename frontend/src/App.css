@@ -5,6 +5,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* Base App Container */
+.App {
+  min-height: 100vh;
+  background: #000000;
+}
+
 /* Typography Classes */
 .display-huge { 
   font-size: 66px; 

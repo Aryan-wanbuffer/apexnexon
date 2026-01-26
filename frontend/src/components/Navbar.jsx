@@ -15,6 +15,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
@@ -28,26 +33,30 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className={`dark-header ${isScrolled ? 'backdrop-blur-xl bg-black/80' : 'bg-black'}`}>
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        <Link to="/" className="dark-logo flex items-center gap-2">
-          <div className="text-2xl font-bold" style={{ color: '#00FFD1' }}>ApexNexon</div>
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl bg-black/95' : 'bg-black'}`}>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] flex items-center justify-between h-20">
+        <Link to="/" className="flex items-center gap-2 z-50">
+          <div className="text-xl sm:text-2xl font-bold" style={{ color: '#00FFD1' }}>ApexNexon</div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex dark-nav">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`dark-nav-link ${isActive(link.path) ? 'active' : ''}`}
+              className={`text-base font-medium transition-colors duration-300 ${
+                isActive(link.path) 
+                  ? 'text-[#00FFD1]' 
+                  : 'text-white/60 hover:text-white'
+              }`}
             >
               {link.name}
             </Link>
           ))}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button - Desktop */}
         <div className="hidden lg:block">
           <Link to="/contact" className="btn-primary">
             Get Started
@@ -56,36 +65,50 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-white p-2"
+          className="lg:hidden text-white p-2 z-50 hover:bg-white/10 transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 absolute top-[80px] left-0 right-0 z-50">
-          <div className="flex flex-col p-6 gap-4">
-            {navLinks.map((link) => (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="lg:hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Menu Content */}
+          <div className="lg:hidden fixed top-20 left-0 right-0 bg-black border-b border-white/10 z-40 max-h-[calc(100vh-80px)] overflow-y-auto">
+            <div className="flex flex-col px-6 py-8 gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-xl font-medium py-3 transition-colors duration-300 ${
+                    isActive(link.path) 
+                      ? 'text-[#00FFD1]' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
               <Link
-                key={link.path}
-                to={link.path}
-                className={`dark-nav-link py-3 ${isActive(link.path) ? 'active' : ''}`}
+                to="/contact"
+                className="btn-primary mt-4 justify-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.name}
+                Get Started
               </Link>
-            ))}
-            <Link
-              to="/contact"
-              className="btn-primary mt-4"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Get Started
-            </Link>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );
