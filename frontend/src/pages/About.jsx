@@ -110,7 +110,7 @@ const About = () => {
               },
               {
                 title: 'Partnership',
-                description: 'We're not just a vendor, we're your long-term technology partner invested in your growth.'
+                description: "We're not just a vendor, we're your long-term technology partner invested in your growth."
               }
             ].map((value, index) => (
               <motion.div
