@@ -33,6 +33,7 @@ const TestimonialCard = ({ testimonial, index }) => {
         <div>
           <div className="body-medium font-semibold text-white">{testimonial.name}</div>
           <div className="body-small text-white/60">{testimonial.position}, {testimonial.company}</div>
+          <div className="body-small text-white/50 mt-1">Case study client · As told to ApexNexon</div>
         </div>
       </div>
     </motion.div>

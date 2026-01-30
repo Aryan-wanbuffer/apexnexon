@@ -18,9 +18,12 @@ const CaseStudyCard = ({ caseStudy, index }) => {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-        <div className="absolute bottom-4 left-4 right-4">
+        <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
           <span className="px-3 py-1 bg-[#00FFD1]/20 border border-[#00FFD1]/50 text-[#00FFD1] body-small">
             {caseStudy.industry}
+          </span>
+          <span className="px-3 py-1 bg-white/10 border border-white/20 text-white/80 body-small">
+            Anonymized
           </span>
         </div>
       </div>

@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import ServiceCard from '../components/ServiceCard';
 import { servicesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Services = () => {
+  usePageTitle('Services');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       {/* Hero */}

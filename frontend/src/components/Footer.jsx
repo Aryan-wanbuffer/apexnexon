@@ -15,16 +15,16 @@ const Footer = () => {
               ApexNexon
             </div>
             <p className="body-muted mb-6">
-              Where Intelligence Meets Automation. Building the future of business with AI and intelligent systems.
+              Where Intelligence Meets Automation. Building the future of business with AI and intelligent systems. Visit us at apexnexon.tech.
             </p>
             <div className="flex gap-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors">
+              <a href="https://www.linkedin.com/company/apexnexon" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors">
+              <a href="https://twitter.com/apexnexon" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors">
+              <a href="https://github.com/apexnexon" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-[#00FFD1] transition-colors" aria-label="GitHub">
                 <Github size={20} />
               </a>
             </div>
@@ -60,15 +60,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Mail size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <span className="body-muted">contact@apexnexon.com</span>
+                <a href="mailto:contact@apexnexon.tech" className="body-muted hover:text-[#00FFD1] transition-colors">contact@apexnexon.tech</a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <span className="body-muted">+1 (555) 123-4567</span>
+                <span className="body-muted">Available on request</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={20} className="text-[#00FFD1] mt-1 flex-shrink-0" />
-                <span className="body-muted">San Francisco, CA, USA</span>
+                <span className="body-muted">Serving clients globally • apexnexon.tech</span>
               </li>
             </ul>
           </div>

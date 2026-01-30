@@ -1,9 +1,92 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { blogPostsData } from '../data/mock';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Edit3, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
+
+function DeletePostButton({ postId, setPosts, posts }) {
+  const [deleting, setDeleting] = useState(false);
+  const handleDelete = async () => {
+    if (!window.confirm('Delete this blog post?')) return;
+    setDeleting(true);
+    try {
+      const url = process.env.REACT_APP_BACKEND_URL;
+      const key = sessionStorage.getItem('blog_edit_key');
+      const headers = {};
+      if (key) headers['X-Blog-Edit-Key'] = key;
+      const res = await fetch(`${url}/api/blog/${postId}`, { method: 'DELETE', headers });
+      if (res.status === 401) {
+        sessionStorage.removeItem('blog_edit_key');
+        toast.error('Session expired. Log in again at Write a post.');
+        window.location.reload();
+        return;
+      }
+      if (!res.ok) throw new Error('Delete failed');
+      setPosts(posts.filter((p) => p.id !== postId));
+      toast.success('Post deleted.');
+    } catch (err) {
+      toast.error('Could not delete post.');
+    } finally {
+      setDeleting(false);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={handleDelete}
+      disabled={deleting}
+      className="p-2 text-white/50 hover:text-red-400 hover:bg-red-400/10 transition-colors disabled:opacity-50"
+      title="Delete post"
+      aria-label="Delete post"
+    >
+      <Trash2 size={18} />
+    </button>
+  );
+}
 
 const Blog = () => {
+  usePageTitle('Blog');
+  const [posts, setPosts] = useState(blogPostsData);
+  const [loading, setLoading] = useState(true);
+
+  const [hasEditKey, setHasEditKey] = useState(false);
+
+  useEffect(() => {
+    setHasEditKey(!!sessionStorage.getItem('blog_edit_key'));
+  }, []);
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_BACKEND_URL;
+    if (!url) {
+      setLoading(false);
+      return;
+    }
+    fetch(`${url}/api/blog`)
+      .then((res) => res.ok ? res.json() : [])
+      .then((data) => {
+        const apiPosts = Array.isArray(data)
+          ? data.map((p) => ({
+              id: p.id || p._id,
+              title: p.title,
+              excerpt: p.excerpt,
+              author: p.author || 'ApexNexon Team',
+              date: p.date || (p.created_at && p.created_at.slice(0, 10)) || '',
+              category: p.category || 'Insights',
+              readTime: p.readTime || p.read_time || '5 min read',
+              image: p.image || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+              fromApi: true
+            }))
+          : [];
+        const merged = [...apiPosts, ...blogPostsData];
+        merged.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+        setPosts(merged);
+      })
+      .catch(() => setPosts(blogPostsData))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       {/* Hero */}
@@ -30,6 +113,13 @@ const Blog = () => {
             <p className="body-large text-white/85 mb-8">
               Insights on AI, automation, and digital transformation from our expert team.
             </p>
+            <Link
+              to="/blog/new"
+              className="inline-flex items-center gap-2 btn-primary"
+            >
+              <Edit3 size={20} />
+              Write a post
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -37,8 +127,11 @@ const Blog = () => {
       {/* Blog Grid */}
       <section className="pb-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
+          {loading ? (
+            <p className="body-medium text-white/70 text-center py-12">Loading posts…</p>
+          ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPostsData.map((post, index) => (
+            {posts.map((post, index) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -83,14 +176,20 @@ const Blog = () => {
                     {post.excerpt}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[#00FFD1] group-hover:gap-4 transition-all duration-300">
-                    <span className="body-medium font-medium">Read More</span>
-                    <ArrowRight size={20} />
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-2 text-[#00FFD1] group-hover:gap-4 transition-all duration-300">
+                      <span className="body-medium font-medium">Read More</span>
+                      <ArrowRight size={20} />
+                    </div>
+                    {hasEditKey && post.fromApi && (
+                      <DeletePostButton postId={post.id} setPosts={setPosts} posts={posts} />
+                    )}
                   </div>
                 </div>
               </motion.article>
             ))}
           </div>
+          )}
         </div>
       </section>
 

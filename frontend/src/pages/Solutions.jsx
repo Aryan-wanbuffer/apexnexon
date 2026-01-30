@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import IndustryCard from '../components/IndustryCard';
 import { industriesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Solutions = () => {
+  usePageTitle('Solutions');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       {/* Hero */}
@@ -36,14 +38,27 @@ const Solutions = () => {
         </div>
       </section>
 
-      {/* Industries Grid */}
+      {/* Industries Grid - animate on load so content appears right away */}
       <section className="pb-24 relative">
         <div className="max-w-[1400px] mx-auto px-[7.6923%]">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {industriesData.map((industry, index) => (
-              <IndustryCard key={industry.id} industry={industry} index={index} />
+              <motion.div
+                key={industry.id}
+                className="h-full"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.2 + index * 0.05 }}
+              >
+                <IndustryCard industry={industry} index={index} noScrollAnimation />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -53,8 +68,8 @@ const Solutions = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
             <h2 className="display-large mb-6">Why Industry-Specific Matters</h2>
@@ -82,8 +97,8 @@ const Solutions = () => {
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
                 className="bg-white/5 backdrop-blur-sm border border-white/10 p-8"
               >
                 <h3 className="heading-2 mb-4 text-[#00FFD1]">{item.title}</h3>
@@ -100,8 +115,8 @@ const Solutions = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
             className="relative bg-white/5 backdrop-blur-sm border border-white/10 p-16 text-center overflow-hidden"
           >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00FFD1]/10 blur-[100px] pointer-events-none"></div>

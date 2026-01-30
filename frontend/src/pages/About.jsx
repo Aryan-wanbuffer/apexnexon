@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { techStackData } from '../data/mock';
 import { Target, Users, Zap, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
+  usePageTitle('About');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       {/* Hero */}

@@ -49,6 +49,13 @@ export const servicesData = [
     description: "Deploy, scale, and manage your applications with modern cloud infrastructure and DevOps practices for maximum reliability.",
     icon: "cloud",
     features: ["AWS/Azure/GCP", "CI/CD Pipelines", "Container Orchestration", "Infrastructure as Code"]
+  },
+  {
+    id: 8,
+    title: "Shopify Development & Integration",
+    description: "Build, customize, and scale your e-commerce presence on Shopify with custom themes, apps, and seamless integrations.",
+    icon: "store",
+    features: ["Custom Themes", "Shopify Apps", "API Integration", "Store Migration"]
   }
 ];
 

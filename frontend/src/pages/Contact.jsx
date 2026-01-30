@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Contact = () => {
+  usePageTitle('Contact');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -183,8 +185,8 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="heading-3 mb-2">Email</h3>
-                        <a href="mailto:contact@apexnexon.com" className="body-medium text-white/85 hover:text-[#00FFD1] transition-colors">
-                          contact@apexnexon.com
+                        <a href="mailto:contact@apexnexon.tech" className="body-medium text-white/85 hover:text-[#00FFD1] transition-colors">
+                          contact@apexnexon.tech
                         </a>
                       </div>
                     </div>
@@ -195,9 +197,9 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="heading-3 mb-2">Phone</h3>
-                        <a href="tel:+15551234567" className="body-medium text-white/85 hover:text-[#00FFD1] transition-colors">
-                          +1 (555) 123-4567
-                        </a>
+                        <p className="body-medium text-white/85">
+                          Available on request — we’ll share details when you reach out
+                        </p>
                       </div>
                     </div>
 
@@ -206,11 +208,10 @@ const Contact = () => {
                         <MapPin size={24} className="text-[#00FFD1]" />
                       </div>
                       <div>
-                        <h3 className="heading-3 mb-2">Office</h3>
+                        <h3 className="heading-3 mb-2">Location</h3>
                         <p className="body-medium text-white/85">
-                          123 Innovation Drive<br />
-                          San Francisco, CA 94105<br />
-                          United States
+                          Serving clients globally<br />
+                          <a href="https://apexnexon.tech" target="_blank" rel="noopener noreferrer" className="text-[#00FFD1] hover:underline">apexnexon.tech</a>
                         </p>
                       </div>
                     </div>
@@ -218,18 +219,15 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Google Maps Placeholder */}
-              <div className="bg-white/5 border border-white/10 h-[400px] relative overflow-hidden">
-                <iframe
-                  title="ApexNexon Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0867674069535!2d-122.39490668468177!3d37.790820479756826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807d3e5c0979%3A0x2c1aae0cde4c979e!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+              {/* Global reach */}
+              <div className="bg-white/5 border border-white/10 h-[400px] relative overflow-hidden flex items-center justify-center">
+                <div className="text-center p-8">
+                  <MapPin size={48} className="text-[#00FFD1]/50 mx-auto mb-4" />
+                  <h3 className="heading-2 mb-2">Serving Clients Globally</h3>
+                  <p className="body-medium text-white/70 max-w-sm mx-auto">
+                    We work remotely with teams worldwide. Get in touch and we’ll respond within 24 hours.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>

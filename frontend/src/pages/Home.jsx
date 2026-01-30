@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import HeroSection from '../components/HeroSection';
 import ServiceCard from '../components/ServiceCard';
 import TestimonialCard from '../components/TestimonialCard';
@@ -19,10 +20,39 @@ const iconMap = {
 };
 
 const Home = () => {
+  usePageTitle('AI & Automation Solutions');
   return (
     <div className="bg-black">
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Trusted By */}
+      <section className="py-12 border-y border-white/10 bg-white/[0.02]">
+        <div className="max-w-[1400px] mx-auto px-[7.6923%]">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-sm font-medium text-white/50 uppercase tracking-wider mb-8"
+          >
+            Trusted by teams worldwide
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-white/40"
+          >
+            <span className="text-lg font-semibold tracking-tight">Enterprise</span>
+            <span className="text-lg font-semibold tracking-tight">Startups</span>
+            <span className="text-lg font-semibold tracking-tight">Healthcare</span>
+            <span className="text-lg font-semibold tracking-tight">Finance</span>
+            <span className="text-lg font-semibold tracking-tight">Logistics</span>
+            <span className="text-lg font-semibold tracking-tight">E‑commerce</span>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Services Overview */}
       <section className="py-24 relative">

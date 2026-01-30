@@ -16,3 +16,19 @@ class ContactFormCreate(BaseModel):
     company: Optional[str] = None
     phone: Optional[str] = None
     message: str
+
+
+class BlogPostCreate(BaseModel):
+    title: str = Field(..., min_length=1, max_length=200)
+    excerpt: str = Field(..., min_length=1, max_length=500)
+    author: str = Field(default="ApexNexon Team", max_length=100)
+    category: str = Field(default="Insights", max_length=80)
+    read_time: str = Field(default="5 min read", max_length=20)
+    image: Optional[str] = Field(None, max_length=500)
+    content: Optional[str] = Field(None, max_length=50000)
+
+
+class BlogPost(BlogPostCreate):
+    id: Optional[str] = None
+    date: Optional[str] = None
+    created_at: Optional[datetime] = None

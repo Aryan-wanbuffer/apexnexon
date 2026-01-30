@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import CaseStudyCard from '../components/CaseStudyCard';
 import { caseStudiesData } from '../data/mock';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const CaseStudies = () => {
+  usePageTitle('Case Studies');
   return (
     <div className="bg-black min-h-screen pt-[80px]">
       {/* Hero */}
