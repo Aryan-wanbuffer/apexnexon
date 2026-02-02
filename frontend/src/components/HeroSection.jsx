@@ -22,7 +22,7 @@ const HeroSection = () => {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] w-full relative z-10 py-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-center">
           {/* Left Side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -96,15 +96,21 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Spline Animation */}
+          {/* Right Side - Spline Animation: larger area + responsive scaling so ball isn't cut */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center order-1 lg:order-2"
+            className="relative h-[480px] sm:h-[540px] lg:h-[700px] flex items-center justify-center order-1 lg:order-2 px-2 sm:px-4 lg:pl-4 lg:pr-0"
           >
-            <div className="w-full h-full relative" style={{ overflow: 'visible' }}>
-              <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
+            <div
+              className="w-full h-full relative flex items-center justify-center"
+              style={{ overflow: 'visible' }}
+            >
+              {/* Mobile only: scale down so full ball fits; desktop unchanged */}
+              <div className="hero-spline-wrap w-full h-full origin-center scale-[0.62] sm:scale-85 md:scale-95 lg:scale-100">
+                <Spline scene="https://prod.spline.design/NbVmy6DPLhY-5Lvg/scene.splinecode" />
+              </div>
             </div>
           </motion.div>
         </div>

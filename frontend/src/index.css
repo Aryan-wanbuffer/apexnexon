@@ -113,3 +113,10 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Hero ball animation: allow overflow on mobile so full ball isn't clipped by Spline container */
+@media (max-width: 767px) {
+    .hero-spline-wrap > div {
+        overflow: visible !important;
+    }
+}

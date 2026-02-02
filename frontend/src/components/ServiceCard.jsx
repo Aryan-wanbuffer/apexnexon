@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
-  Brain, FileText, Code, Smartphone, Zap, Layers, Cloud, Store,
+  Brain, FileText, Code, Smartphone, Zap, Layers, Cloud, Store, Globe,
   ArrowRight
 } from 'lucide-react';
 
@@ -13,7 +14,8 @@ const iconMap = {
   zap: Zap,
   layers: Layers,
   cloud: Cloud,
-  store: Store
+  store: Store,
+  globe: Globe
 };
 
 const ServiceCard = ({ service, index }) => {
@@ -59,10 +61,13 @@ const ServiceCard = ({ service, index }) => {
         </ul>
 
         {/* Learn More */}
-        <div className="flex items-center gap-2 text-[#00FFD1] group-hover:gap-4 transition-all duration-300 cursor-pointer">
-          <span className="body-medium font-medium">Learn More</span>
+        <Link
+          to={`/services/${service.id}`}
+          className="flex items-center gap-2 text-[#00FFD1] group-hover:gap-4 transition-all duration-300 cursor-pointer body-medium font-medium"
+        >
+          <span>Learn More</span>
           <ArrowRight size={20} />
-        </div>
+        </Link>
       </div>
     </motion.div>
   );

@@ -6,7 +6,25 @@ export const servicesData = [
     title: "AI & Machine Learning Solutions",
     description: "Build intelligent systems with custom AI models, predictive analytics, and automated decision-making capabilities tailored to your business needs.",
     icon: "brain",
-    features: ["Custom Model Training", "Predictive Analytics", "Natural Language Processing", "Computer Vision"]
+    features: ["Custom Model Training", "Predictive Analytics", "Natural Language Processing", "Computer Vision"],
+    longDescription: "Enterprise-grade AI and machine learning solutions that transform data into actionable intelligence. We design, build, and deploy custom ML models and AI systems that scale with your operations—from predictive analytics and natural language processing to computer vision and automated decision-making. Our team combines deep technical expertise with industry best practices to deliver solutions that integrate seamlessly with your existing infrastructure and drive measurable business outcomes.",
+    benefits: [
+      "End-to-end ownership from strategy and data pipelines to model deployment and monitoring",
+      "Built for scale: production-ready systems with robust MLOps and governance",
+      "Industry-specific solutions with compliance (HIPAA, SOC 2, GDPR) where required",
+      "Proven ROI: our engagements typically deliver 3–5x return within the first year"
+    ],
+    outcomes: [
+      { label: "Faster time-to-value", value: "8–12 weeks" },
+      { label: "Model accuracy", value: "95%+" },
+      { label: "Client ROI (avg)", value: "300%" }
+    ],
+    approach: [
+      { title: "Discovery & strategy", description: "Understand your data, goals, and constraints; define success metrics and architecture." },
+      { title: "Data & model development", description: "Build pipelines, train and validate models, and iterate with your team." },
+      { title: "Deployment & integration", description: "Deploy to your environment with APIs, monitoring, and rollback strategies." },
+      { title: "Optimization & support", description: "Continuous improvement, retraining, and dedicated support." }
+    ]
   },
   {
     id: 2,
@@ -56,6 +74,13 @@ export const servicesData = [
     description: "Build, customize, and scale your e-commerce presence on Shopify with custom themes, apps, and seamless integrations.",
     icon: "store",
     features: ["Custom Themes", "Shopify Apps", "API Integration", "Store Migration"]
+  },
+  {
+    id: 9,
+    title: "Web Development",
+    description: "Professional websites and web applications built with modern frameworks—responsive, fast, and tailored to your brand and business goals.",
+    icon: "globe",
+    features: ["Responsive Websites", "Single Page Apps", "CMS Integration", "SEO & Performance"]
   }
 ];
 
