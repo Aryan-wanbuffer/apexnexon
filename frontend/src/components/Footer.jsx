@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Github } from 'lucide-react';
 
 const Footer = () => {
@@ -11,9 +12,34 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div>
-            <div className="text-2xl font-bold mb-4" style={{ color: '#00FFD1' }}>
-              ApexNexon
-            </div>
+            <Link to="/" className="inline-block mb-4 h-20 sm:h-24 md:h-28 lg:h-32 min-w-[140px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[220px]">
+              <motion.span
+                className="block h-full w-full bg-[#00FFD1]"
+                style={{
+                  WebkitMaskImage: 'url(/logo.png)',
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center',
+                  maskImage: 'url(/logo.png)',
+                  maskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                }}
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: [1, 1.04, 1] }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{
+                  opacity: { duration: 0.5, ease: 'easeOut' },
+                  scale: {
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  },
+                }}
+                aria-hidden
+              />
+              <img src="/logo.png" alt="ApexNexon" className="sr-only" />
+            </Link>
             <p className="body-muted mb-6">
               Where Intelligence Meets Automation. Building the future of business with AI and intelligent systems. Visit us at apexnexon.tech.
             </p>

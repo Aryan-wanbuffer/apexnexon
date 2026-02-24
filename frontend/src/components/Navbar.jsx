@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
@@ -34,9 +35,36 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl bg-black/95' : 'bg-black'}`}>
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-2 z-50">
-          <div className="text-xl sm:text-2xl font-bold" style={{ color: '#00FFD1' }}>ApexNexon</div>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-[7.6923%] flex items-center justify-between h-20 sm:h-24 md:h-28 lg:h-32">
+        <Link to="/" className="flex items-center z-50 h-20 sm:h-24 md:h-28 lg:h-32">
+          <motion.span
+            className="block h-full min-w-[140px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[220px] bg-[#00FFD1]"
+            style={{
+              WebkitMaskImage: 'url(/logo.png)',
+              WebkitMaskSize: 'contain',
+              WebkitMaskRepeat: 'no-repeat',
+              WebkitMaskPosition: 'center',
+              maskImage: 'url(/logo.png)',
+              maskSize: 'contain',
+              maskRepeat: 'no-repeat',
+              maskPosition: 'center',
+            }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{
+              opacity: 1,
+              scale: [1, 1.04, 1],
+            }}
+            transition={{
+              opacity: { duration: 0.5, ease: 'easeOut' },
+              scale: {
+                duration: 2.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              },
+            }}
+            aria-hidden
+          />
+          <img src="/logo.png" alt="ApexNexon" className="sr-only" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -83,7 +111,7 @@ const Navbar = () => {
           />
           
           {/* Menu Content */}
-          <div className="lg:hidden fixed top-20 left-0 right-0 bg-black border-b border-white/10 z-40 max-h-[calc(100vh-80px)] overflow-y-auto">
+          <div className="lg:hidden fixed top-20 sm:top-24 md:top-28 lg:top-32 left-0 right-0 bg-black border-b border-white/10 z-40 max-h-[calc(100vh-5rem)] sm:max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-7rem)] lg:max-h-[calc(100vh-8rem)] overflow-y-auto">
             <div className="flex flex-col px-6 py-8 gap-6">
               {navLinks.map((link) => (
                 <Link
